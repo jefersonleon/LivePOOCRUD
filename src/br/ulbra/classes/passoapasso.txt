@@ -1,0 +1,9 @@
+Passos para trabalhar com BD
+
+1º entidades - Usuario
+2º abrir o servidor mysql (EASYPHP)
+3º Criar o banco de dados - ex.: bdlivepoo
+4º Criar a(s) tabela(s) - ex.: tbusuario
+5º Criar formularios
+6º Instalar a biblioteca de acesso ao bd
+7º Criar as classes de conexão
