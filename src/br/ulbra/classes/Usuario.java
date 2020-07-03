@@ -35,7 +35,7 @@ public class Usuario {
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.login = login.toUpperCase();
     }
 
     public String getEmail() {
