@@ -7,7 +7,9 @@ package br.ulbra.classes;
 public class Usuario {
     private int id;
     private String nome;
-    private String login;
+    private String sexo;
+    private String dataAni;
+    private String celular;
     private String email;
     private String senha;
 
@@ -30,13 +32,7 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login.toUpperCase();
-    }
+   
 
     public String getEmail() {
         return email;
@@ -52,6 +48,30 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getDataAni() {
+        return dataAni;
+    }
+
+    public void setDataAni(String dataAni) {
+        this.dataAni = dataAni;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
     
     

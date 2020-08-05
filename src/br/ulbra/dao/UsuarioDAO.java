@@ -33,12 +33,16 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO tbusuario (nome,login,senha,email) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO tbusuario (nome,sexo,dataAni,celular,email,senha) VALUES (?,?,?,?,?,?)");
+        
             stmt.setString(1, u.getNome());
-            stmt.setString(2, u.getLogin());
-            stmt.setString(3, u.getSenha());
-            stmt.setString(4, u.getEmail());
-
+            stmt.setString(2, u.getSexo());
+            stmt.setString(3, u.getDataAni());
+            stmt.setString(4, u.getCelular());
+            stmt.setString(5, u.getEmail());
+            stmt.setString(6, u.getSenha());
+            
+            
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Usuário Salvo com sucesso!");
@@ -58,7 +62,6 @@ public class UsuarioDAO {
         try {
             stmt = con.prepareStatement("DELETE FROM tbusuario WHERE id = ?");
             stmt.setInt(1, u.getId());
-
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
@@ -76,13 +79,15 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE tbusuario SET nome = ?,login = ? , senha= ?, email = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE tbusuario SET nome = ?, sexo = ? , dataAni= ?, celular = ?, email = ?, senha =  ? WHERE id = ?");
             stmt.setString(1, u.getNome());
-            stmt.setString(2, u.getLogin());
-            stmt.setString(3, u.getSenha());
-            stmt.setString(4, u.getEmail());
+            stmt.setString(2, u.getSexo());
+            stmt.setString(3, u.getDataAni());
+            stmt.setString(4, u.getCelular());
+            stmt.setString(5, u.getEmail());
+            stmt.setString(6, u.getSenha());
 
-            stmt.setInt(5, u.getId());
+            stmt.setInt(7, u.getId());
 
             stmt.executeUpdate();
 
@@ -113,10 +118,11 @@ public class UsuarioDAO {
                 Usuario usuario = new Usuario();
 
                 usuario.setId(rs.getInt("id"));
-                usuario.setLogin(rs.getString("nome"));
-                usuario.setLogin(rs.getString("login"));
-                usuario.setLogin(rs.getString("senha"));
-                usuario.setLogin(rs.getString("email"));
+                usuario.setNome(rs.getString("nome"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setCelular(rs.getString("celular"));
+                usuario.setDataAni(rs.getString("dataAni"));
+                usuario.setSexo(rs.getString("sexo"));
 
                 usuarios.add(usuario);
             }
@@ -140,7 +146,7 @@ public class UsuarioDAO {
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM tbusuario WHERE login LIKE ?");
+            stmt = con.prepareStatement("SELECT * FROM tbusuario WHERE nome LIKE ?");
             stmt.setString(1, "%" + desc + "%");
 
             rs = stmt.executeQuery();
@@ -150,7 +156,7 @@ public class UsuarioDAO {
                 Usuario usuario = new Usuario();
 
                 usuario.setId(rs.getInt("id"));
-                usuario.setLogin(rs.getString("login"));
+                usuario.setEmail(rs.getString("email"));
 
                 usuarios.add(usuario);
             }
@@ -165,7 +171,7 @@ public class UsuarioDAO {
 
     }
 
-    public boolean checkLogin(String login, String senha) {
+    public boolean checkLogin(String email, String senha) {
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -174,8 +180,8 @@ public class UsuarioDAO {
 
         try {
 
-            stmt = con.prepareStatement("SELECT * FROM tbusuario WHERE login = ? and senha = ?");
-            stmt.setString(1, login);
+            stmt = con.prepareStatement("SELECT * FROM tbusuario WHERE email = ? and senha = ?");
+            stmt.setString(1, email);
             stmt.setString(2, senha);
 
             rs = stmt.executeQuery();
