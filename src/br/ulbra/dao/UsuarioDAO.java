@@ -21,7 +21,8 @@ import javax.swing.JOptionPane;
  * @author Jeferson Leon
  */
 public class UsuarioDAO {
-       Connection con;
+
+    Connection con;
 
     public UsuarioDAO() throws SQLException {
         con = ConnectionFactory.getConnection();
@@ -34,20 +35,19 @@ public class UsuarioDAO {
 
         try {
             stmt = con.prepareStatement("INSERT INTO tbusuario (nome,sexo,dataAni,celular,email,senha) VALUES (?,?,?,?,?,?)");
-        
+
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getSexo());
             stmt.setString(3, u.getDataAni());
             stmt.setString(4, u.getCelular());
             stmt.setString(5, u.getEmail());
             stmt.setString(6, u.getSenha());
-            
-            
+
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Usuário Salvo com sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
@@ -79,15 +79,15 @@ public class UsuarioDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE tbusuario SET nome = ?, sexo = ? , dataAni= ?, celular = ?, email = ?, senha =  ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE tbusuario SET nome = ?, sexo = ? , dataAni= ?, celular = ?, email = ? WHERE id = ?");
             stmt.setString(1, u.getNome());
             stmt.setString(2, u.getSexo());
             stmt.setString(3, u.getDataAni());
             stmt.setString(4, u.getCelular());
             stmt.setString(5, u.getEmail());
-            stmt.setString(6, u.getSenha());
+          
 
-            stmt.setInt(7, u.getId());
+            stmt.setInt(6, u.getId());
 
             stmt.executeUpdate();
 
@@ -119,10 +119,10 @@ public class UsuarioDAO {
 
                 usuario.setId(rs.getInt("id"));
                 usuario.setNome(rs.getString("nome"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setCelular(rs.getString("celular"));
-                usuario.setDataAni(rs.getString("dataAni"));
                 usuario.setSexo(rs.getString("sexo"));
+                usuario.setDataAni(rs.getString("dataAni"));
+                usuario.setCelular(rs.getString("celular"));
+                usuario.setEmail(rs.getString("email"));
 
                 usuarios.add(usuario);
             }

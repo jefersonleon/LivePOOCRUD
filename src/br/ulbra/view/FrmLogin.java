@@ -22,7 +22,7 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
-        this.setLocationRelativeTo(null);
+     this.setLocationRelativeTo(null);//centraliza o formulario
     }
 
     /**
